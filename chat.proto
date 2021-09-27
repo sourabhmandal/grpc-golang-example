@@ -1,0 +1,29 @@
+syntax = "proto3";
+package main;
+
+message UnaryServerMessage {
+  string body = 1;
+  string language = 2;
+}
+
+message UnaryNormalMessage {
+  string body = 1;
+  string language = 2;
+}
+
+message StreamServerMessage {
+  string body = 1;
+  string language = 2;
+}
+
+message StreamNormalMessage {
+  string body = 1;
+  string language = 2;
+}
+
+service ChatService {
+  rpc unaryComms(UnaryNormalMessage) returns (UnaryServerMessage) {}
+  rpc serverStreamComms(StreamNormalMessage) returns (stream StreamServerMessage) {}
+  rpc clientStreamComms(stream StreamNormalMessage) returns (StreamServerMessage) {}
+  rpc biDirectionStreamComms(stream StreamNormalMessage) returns (stream StreamServerMessage) {}
+}
